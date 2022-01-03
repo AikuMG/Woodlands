@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 
 app.post('/login', (req, res) => {
     const user = req.body.username;
-    res.send("Log in page");
+    res.send(`Welcome, ${user}! Log in successful.`);
 })
 
 app.get("/Woodlands", (req, res) => {
