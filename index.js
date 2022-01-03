@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const session = require('express-session');
+const { resetWatchers } = require("nodemon/lib/monitor/watch");
 //const functions = require('./functions.js');
 const port = process.env.PORT || 3636;
 const startHealth = 100;
@@ -36,32 +37,39 @@ app.listen(port, () => {
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-    const session_username = req.session.username;
-    //let invalid_login = false;
+    let user = "";
+    let punctuation = "";
 
-    res.render("index", {user: session_username});
-    //invalid_login = req.query.reason || null;
-})
+    if (req.session && req.session.username){
+        user = req.session.username;
+        punctuation = ", ";
+    }
+
+    else {
+        res.render("index", {currentUser: user, punctuation: punctuation});
+    }
+});
 
 app.post('/login', (req, res) => {
-    const user = req.body.username;
-    const pass =req.body.password;
-    req.session.username = user;
     const validUsers = [
-        {name: "aag", password: "passw0rd"},
-        {name: "tp6", password: "t@l3nt"},
-        {name: "sarah", password: "cAt1uvR"}
+        {"name": "aag", "password": "passw0rd"},
+        {"name": "tp6", "password": "t@l3nt"},
+        {"name": "sarah", "password": "cAt1uvR"}
     ]
+    const user = req.body.username;
+    const pass = req.body.password;
 
     const foundUser = validUsers.find(user1 => user1.name == user && user1.password == pass);
 
     if (foundUser){
         req.session.username = user;
-        res.redirect("Woodlands");
+        res.redirect("/Woodlands");
     }
     else {
-        req.session.destroy(()=>{});
+        req.session.destroy(()=>{
         res.redirect("/?reason=invalid_user");
+        })
+        res.redirect("/");
     }
 })
 
