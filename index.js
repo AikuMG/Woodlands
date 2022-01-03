@@ -18,6 +18,9 @@ const weapons = [
     {name: "gun", speed: 4, power: 4, damage: 8}
 ]
 
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
 app.listen(port, () => {
     console.log(`Hosting game on localhost:${port}`);
 })
