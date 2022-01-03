@@ -183,7 +183,7 @@
         function powerMove(){
             const url = window.location.toString();
             let end = url.length - 1;
-            let stats = url.substr(22, end);
+            let stats = url.substr(41, end);
             let statArray = stats.split("/");
             let power = statArray[1];
             let userHealth = document.getElementById('userHealth');
