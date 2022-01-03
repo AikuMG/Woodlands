@@ -202,13 +202,13 @@
             let end = url.length - 1;
             let stats = url.substr(41, end);
             let statArray = stats.split("/");
-            let power = statArray[1];
+            let power = statArray[2];
             let userHealth = document.getElementById('userHealth');
             let userHealthInt = parseInt(userHealth.innerHTML);
             let beast = beasts[0];
 
             for (i=0; i<weapons.length; i++){
-                if (weapons[i].name == statArray[0]){
+                if (weapons[i].name == statArray[1]){
                     weapon = weapons[i];
                 }
             }
@@ -238,7 +238,7 @@
             }
 
             if (power == 'supercharge') {
-                let luck = parseFloat(statArray[2]);
+                let luck = parseFloat(statArray[3]);
                 let randomNum = Math.random() * (6-1) + 1;
 
                 let beastHit = (beast.luck > randomNum) ? parseInt((beast.damage * (1 + beast.luck - randomNum))) : beast.damage;
@@ -284,9 +284,8 @@
             let end = url.length - 1;
             let stats = url.substr(41, end);
             let statArray = stats.split("/");
-            let luck = parseFloat(statArray[2]);
+            let luck = parseFloat(statArray[3]);
             let weapon;
-            console.log(statArray);
 
             for (i=0; i<weapons.length; i++){
                 if (weapons[i].name == statArray[1]){
@@ -383,7 +382,7 @@
             let end = url.length - 1;
             let stats = url.substr(41, end);
             let statArray = stats.split("/");
-            let luck = parseFloat(statArray[2]);
+            let luck = parseFloat(statArray[3]);
             let weapon;
             let randomNum = Math.random() * (6-1) + 1;
 
