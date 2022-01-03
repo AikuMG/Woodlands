@@ -24,7 +24,7 @@ app.listen(port, () => {
 
 app.set("view engine", "ejs");
 
-app.get("/Woodlands", (req, res) => {
+app.get("/", (req, res) => {
     res.render("Woodlands");
 })
 
