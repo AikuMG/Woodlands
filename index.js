@@ -36,11 +36,11 @@ app.listen(port, () => {
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-    //const session_username = req.session.username;
-    let invalid_login = false;
+    const session_username = req.session.username;
+    //let invalid_login = false;
 
-    //res.render("index", {user: session_username});
-    invalid_login = req.query.reason || null;
+    res.render("index", {user: session_username});
+    //invalid_login = req.query.reason || null;
 })
 
 app.post('/login', (req, res) => {
