@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 app.post('/login', (req, res) => {
     const user = req.body.username;
     const pass =req.body.password;
-    //req.session.username = user;
+    req.session.username = user;
     const validUsers = [
         {name: "aag", password: "passw0rd"},
         {name: "tp6", password: "t@l3nt"},
