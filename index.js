@@ -25,6 +25,15 @@ app.listen(port, () => {
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
+    res.render("index");
+})
+
+app.post('/login', (req, res) => {
+    const user = req.body.username;
+    res.send("Log in page");
+})
+
+app.get("/Woodlands", (req, res) => {
     res.render("Woodlands");
 })
 
