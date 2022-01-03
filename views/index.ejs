@@ -47,6 +47,12 @@
             <input type="submit" value="Log In">
         </form>
     </div>
+
+    <% if (invalid_login) { %>
+        <div class="error">
+        <p>Invalid login.</p>
+        </div>
+    <% } %>
     </center>
 </body>
 </html>

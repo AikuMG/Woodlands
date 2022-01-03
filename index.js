@@ -37,24 +37,32 @@ app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
     const session_username = req.session.username;
+    let invalid_login = false;
+
     res.render("index", {user: session_username});
+    invalid_login = req.query.reason || null;
 })
 
 app.post('/login', (req, res) => {
     const user = req.body.username;
-    req.session.username = user;
+    const pass =req.body.password;
+    //req.session.username = user;
     const validUsers = [
         {name: "aag", password: "passw0rd"},
         {name: "tp6", password: "t@l3nt"},
         {name: "sarah", password: "cAt1uvR"}
     ]
 
-    if (validUsers.includes(user)){
+    const foundUser = validUsers.find(user1 => user1.name == user && user1.password == pass);
+
+    if (foundUser){
         req.session.username = user;
         res.redirect("Woodlands");
     }
-
-    else { res.redirect("/"); }
+    else {
+        req.session.destroy(()=>{});
+        res.redirect("/?reason=invalid_user");
+    }
 })
 
 app.get("/Woodlands", (req, res) => {
