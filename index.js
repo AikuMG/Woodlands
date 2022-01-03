@@ -48,7 +48,10 @@ app.post('/login', (req, res) => {
         {"name": "sarah", "password": "cAt1uvR"}
     ]
 
+    console.log(user);
+
     if (validUsers.includes(user)){
+        console.log(`I'm in the if statement with the user ${user}`);
         req.session.username = user;
         res.redirect("/Woodlands");
     }
