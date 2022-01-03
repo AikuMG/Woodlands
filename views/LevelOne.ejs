@@ -114,10 +114,27 @@
             opacity: 0.8;
             left: 30.2%;
         }
+        
+        #attackMsg {
+            display: none;
+            height: 300px;
+            width: 350px;
+            background-color: black;
+        }
+
+        #attackDialog {
+            font-size: 1.5em;
+            color: rgb(8, 87, 8);
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
 
     </style>
 </head>
 <body>
+
+    <div class="dialog" id="attackMsg">
+        <p8 id="attackDialog">Placeholder</p8>
+    </div>
 
     <h3 class="intro-para">And so begins your journey,&nbsp;Adventurer!<br>
         You have prepared yourself well by choosing the <%=weapon.name%> and the <%=magic%> power.<br>
@@ -283,15 +300,20 @@
                 let health = document.getElementById('userHealth');
                 let healthInt = parseInt(health.innerHTML);
                 let adventurerHP = healthInt - beastHit;
-                alert(`The ${beast.name} is quick and struck ${firstTurn} time(s) taking off ${beastHit} HP!`);
+                //alert(`The ${beast.name} is quick and struck ${firstTurn} time(s) taking off ${beastHit} HP!`);
                 health.innerHTML = health.innerHTML.replace(health.innerHTML, adventurerHP.toString());
 
                 let userHit = weapon.damage;
                 let beastHealth = document.getElementById('beastHealth');
                 let beastHealthInt = parseInt(beastHealth.innerHTML);
                 let beastHP = beastHealthInt - userHit;
-                alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
+                //alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
                 beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+
+                let attackMsg = (`The ${beast.name} is quick and struck ${firstTurn} time(s) taking off ${beastHit} HP!\nYou attacked the ${beast.name} and took off ${userHit} HP!`);
+                let dialog = document.getElementById('attackDialog');
+                attackDialog.innerHTML = attackDialog.innerHTML.replace(attackDialog.innerHTML, attackMsg);
+                document.getElementById("attackMsg").style.display = "block";
             }
     
             if (firstTurn < 0){
