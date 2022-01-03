@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 4</title>
+    <style>
+        body {
+            background-image: url('https://i.pinimg.com/originals/68/30/30/68303024d2caeb1c216be77b175da9b6.gif');
+            background-size: cover;
+        }
+
+        @keyframes disappear {
+            0% {opacity: 0.75;}
+            100% {opacity: 0;}
+        }
+
+        .intro-para {
+            color: gold;
+            font-size: 2em;
+            width: 80%;
+            height: 155px;
+            background-color: black;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin-top: 10%;
+            margin-left: 10%;
+            text-align: center;
+            animation: disappear 3s forwards;
+            animation-delay: 7s;
+            opacity: 0.75;
+        }
+
+        p {
+            font-size: 2em;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: black;
+        }
+
+        @keyframes appear {
+            0% {opacity: 0;}
+            100% {opacity: 0.8;}
+        }
+
+        .battle {
+            text-align: center;
+            background-color: white;
+            opacity: 0;
+            animation: appear 0.2s forwards;
+            animation-delay: 10s;
+            width: 600px;
+            height: 600px;
+            margin-top: 0%;
+            margin-left: 30%;
+            font-weight: bold;
+        }
+
+        .butt {
+            background-color: rgb(8, 87, 8);
+            color: white;
+            text-align: center;
+            font-size: 2.5em;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #power-butt {
+            margin-left: 50px;
+        }
+
+        .userStats {
+            background-color: white;
+            opacity: 0;
+            animation: appear 0.01s forwards;
+            animation-delay: 10s;
+            width: 250px;
+            height: 150px;
+            margin-top: -20%;
+            margin-left: 0%;
+            font-weight: bold;
+        }
+
+        .beastStats {
+            background-color: white;
+            opacity: 0;
+            animation: appear 0.01s forwards;
+            animation-delay: 10s;
+            width: 250px;
+            height: 75px;
+            margin-top: -8%;
+            margin-left: 85%;
+            font-weight: bold;
+        }
+        
+        p2{
+            font-size: 1.5em;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: black;
+        }
+
+        p3 {
+            font-size: 2.5em;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: gold;
+        }
+
+        #nextMove {
+            display: none;
+            position: absolute;
+            margin-top: -35.16%;
+            background-color: black;
+            width: 600px;
+            height: 600px;
+            opacity: 0.8;
+            left: 30.2%;
+        }
+
+    </style>
+</head>
+<body>
+    <h3 class="intro-para">Who would've thought that a deer could be so vicious?<br>
+        And to think I actually try to avoid hitting them with my car.<br>
+        Speaking of cars, do you see that over there?<br>
+        Is that an airplane? Is that Superman? No!<br>
+
+    </h3>
+
+    <div class="userStats">
+        <p2>
+            HP:<p2 id="userHealth">100</p2>%<br>
+            Weapon: <%=weapon.name%><br>
+            Damage: <%=weapon.damage%><br>
+            Power: <%=magic%>
+        </p2>
+    </div>
+
+    <div class="beastStats">
+        <p2>
+            <%=beast.name%><br>
+            HP:<p2 id="beastHealth">50</p2>%<br>
+        </p2>
+    </div>
+
+    <div class="battle">
+        <img src="https://img.itch.zone/aW1hZ2UvMTMyNzA1LzYwOTIyMy5naWY=/347x500/6g%2FL4t.gif" width="50%" height="50%">
+        <p> It's a <%=beast.name%>!!!<br>
+            Show no mercy.<br></p>
+        <button class="butt" id="attackDaButt" onclick="firstAttack()">Attack!</button>&nbsp;
+
+
+    </div>
+
+    <div class="card" id="nextMove">
+        <br><br><br>
+        <center><p3>What's your next move?</p3><br><br>
+        <button class="butt" id="attackDaButt" onclick="attack()">Attack!</button>&nbsp;
+        <button class="butt" id="power-butt" onclick="powerMove()">Use Power</button></center>
+    </div>
+
+    <script>
+        const beasts = [
+            {name: "snake", speed: 5, power: 1, damage: 5, health: 50, luck: 3},
+            {name: "wolf", speed: 4, power: 2, damage: 10, health: 60, luck: 3},
+            {name: "buck", speed: 3, power: 4, damage: 20, health: 75, luck: 3},
+            {name: "raven", speed: 5, power: 2, damage: 10, health: 50, luck: 3},
+            {name: "boar", speed: 3, power: 4, damage: 20, health: 80, luck: 4},
+            {name: "bear", speed: 5, power: 5, damage: 25, health: 120, luck: 5}
+        ]
+    
+        const weapons = [
+            {name: "sword", speed: 3, power: 3, damage: 6},
+            {name: "axe", speed: 2, power: 5, damage: 10},
+            {name: "gun", speed: 4, power: 4, damage: 8}
+        ]
+
+        function powerMove(){
+            const url = window.location.toString();
+            let end = url.length - 1;
+            let stats = url.substr(22, end);
+            let statArray = stats.split("/");
+            statArray.pop();
+            let power = statArray[1];
+            let userHealth = document.getElementById('userHealth');
+            let userHealthInt = parseInt(userHealth.innerHTML);
+            let beast = beasts[3];
+
+            for (i=0; i<weapons.length; i++){
+                if (weapons[i].name == statArray[0]){
+                    weapon = weapons[i];
+                }
+            }
+
+            if (power == 'healer'){
+                if (userHealthInt <= 90){
+                    let adventurerHP = userHealthInt + 10;
+                    userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                }
+
+                else if (userHealthInt > 90 && userHealthInt < 100){
+                    let adventurerHP = 100;
+                    userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                }
+
+                else if (userHealthInt == 100){
+                    alert(`You cannot use your power right now because you are at full health!`);
+                }
+
+            }
+
+            if (power == 'clone') {
+                alert(`You summoned a clone and gained half your HP`);
+                adventurerHP = userHealthInt + (userHealthInt / 2);
+                userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                document.getElementById("power-butt").style.display = "none";
+            }
+
+            if (power == 'supercharge') {
+                let luck = parseFloat(statArray[2]);
+                let randomNum = Math.random() * (6-1) + 1;
+
+                let beastHit = (beast.luck > randomNum) ? parseInt((beast.damage * (1 + beast.luck - randomNum))) : beast.damage;
+                let adventurerHP = userHealthInt - beastHit;
+                alert(`The ${beast.name} attacked and took off ${beastHit} HP!`);
+
+                if (adventurerHP > 0){
+                    userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                }
+
+                else {
+                    alert(`Your journey ends here, Adventurer!`);
+                    window.open(`/Woodlands`, "_self");
+                    return false;
+                }
+
+                let userHit = (luck > randomNum) ? parseInt((weapon.damage * (2 + luck - randomNum))) : weapon.damage * 2;
+                let beastHealth = document.getElementById('beastHealth');
+                let beastHealthInt = parseInt(beastHealth.innerHTML);
+                let beastHP = beastHealthInt - userHit;
+                alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
+
+                if (beastHP > 0){
+                    beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+                }
+
+                else{
+                    alert(`You defeated the ${beast.name}! Go on to the next level.`);
+                    
+                    urlBuilder(statArray)
+                    
+                    function urlBuilder(array) {
+                        let stringy = array.toString();
+                        let url = stringy.replace(/,/g, '/');
+                        window.open(`/${url}/6`, '_self');
+                    }
+                    return false;
+                }
+            }
+        }
+
+        function firstAttack(){
+            const url = window.location.toString();
+            let end = url.length - 1;
+            let stats = url.substr(22, end);
+            let statArray = stats.split("/");
+            statArray.pop();
+            let luck = parseFloat(statArray[2]);
+            let weapon;
+
+            for (i=0; i<weapons.length; i++){
+                if (weapons[i].name == statArray[0]){
+                    weapon = weapons[i];
+                }
+            }
+
+            let beast = beasts[3];
+            let firstTurn = beast.speed - weapon.speed;
+            if (firstTurn > 0){
+                let beastHit = firstTurn * beast.damage;
+                let health = document.getElementById('userHealth');
+                let healthInt = parseInt(health.innerHTML);
+                let adventurerHP = healthInt - beastHit;
+                alert(`The ${beast.name} is quick and struck ${firstTurn} time(s) taking off ${beastHit} HP!`);
+                health.innerHTML = health.innerHTML.replace(health.innerHTML, adventurerHP.toString());
+
+                let userHit = weapon.damage;
+                let beastHealth = document.getElementById('beastHealth');
+                let beastHealthInt = parseInt(beastHealth.innerHTML);
+                let beastHP = beastHealthInt - userHit;
+                alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
+                beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+            }
+    
+            if (firstTurn < 0){
+                firstTurn *= -1;
+                let userHit = firstTurn * weapon.damage;
+                let beastHealth = document.getElementById('beastHealth');
+                let beastHealthInt = parseInt(beastHealth.innerHTML);
+                let beastHP = beastHealthInt - userHit;
+                alert(`You're quicker than the ${beast.name} and got in ${firstTurn} hit(s)!\nYou took off ${userHit} HP from the ${beast.name}`);
+                beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+
+                let beastHit = beast.damage;
+                let userHealth = document.getElementById('userHealth');
+                let userHealthInt = parseInt(userHealth.innerHTML);
+                let adventurerHP = userHealthInt - beastHit;
+                alert(`The ${beast.name} attacked and took off ${beastHit} HP!`);
+                userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+            }
+
+            if (firstTurn == 0){
+                if (luck > 3.2){
+                    let userHit = weapon.damage;
+                    let beastHealth = document.getElementById('beastHealth');
+                    let beastHealthInt = parseInt(beastHealth.innerHTML);
+                    let beastHP = beastHealthInt - userHit;
+                    alert(`Luck was in your favor and you were able to attack the ${beast.name} first.\n
+                    Your hit took off ${userHit} HP from the ${beast.name}!`);
+                    beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+
+                    let beastHit = beast.damage;
+                    let userHealth = document.getElementById('userHealth');
+                    let userHealthInt = parseInt(userHealth.innerHTML);
+                    let adventurerHP = userHealthInt - beastHit;
+                    alert(`The ${beast.name} attacked and took off ${beastHit} HP!`);
+                    userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                }
+
+                else {
+                    let beastHit = beast.damage;
+                    let userHealth = document.getElementById('userHealth');
+                    let userHealthInt = parseInt(userHealth.innerHTML);
+                    let adventurerHP = userHealthInt - beastHit;
+                    alert(`The ${beast.name} attacked first and took off ${beastHit} HP!`);
+                    userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+
+                    let userHit = weapon.damage;
+                    let beastHealth = document.getElementById('beastHealth');
+                    let beastHealthInt = parseInt(beastHealth.innerHTML);
+                    let beastHP = beastHealthInt - userHit;
+                    alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
+                    beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+
+                }
+            }
+
+            nextMove();
+
+        }
+
+        function nextMove() {
+            document.getElementById("nextMove").style.display = "block";
+        }
+
+        function attack(){
+            const url = window.location.toString();
+            let end = url.length - 1;
+            let stats = url.substr(22, end);
+            let statArray = stats.split("/");
+            statArray.pop();
+            let luck = parseFloat(statArray[2]);
+            let weapon;
+            let randomNum = Math.random() * (6-1) + 1;
+
+            for (i=0; i<weapons.length; i++){
+                if (weapons[i].name == statArray[0]){
+                    weapon = weapons[i];
+                }
+            }
+
+            let beast = beasts[3];
+            let firstTurn = beast.speed - weapon.speed;
+            if (firstTurn > 0){
+                let beastHit = (beast.luck > randomNum) ? parseInt((beast.damage * (1 + beast.luck - randomNum))) : beast.damage;
+                let userHealth = document.getElementById('userHealth');
+                let userHealthInt = parseInt(userHealth.innerHTML);
+                let adventurerHP = userHealthInt - beastHit;
+                alert(`The ${beast.name} attacked and took off ${beastHit} HP!`);
+
+                if (adventurerHP > 0){
+                    userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                }
+
+                else {
+                    alert(`Your journey ends here, Adventurer!`);
+                    window.open(`/Woodlands`, "_self");
+                    return false;
+                }
+
+                let userHit = (luck > randomNum) ? parseInt((weapon.damage * (1 + luck - randomNum))) : weapon.damage;
+                let beastHealth = document.getElementById('beastHealth');
+                let beastHealthInt = parseInt(beastHealth.innerHTML);
+                let beastHP = beastHealthInt - userHit;
+                alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
+
+                if (beastHP > 0){
+                    beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+                }
+
+                else{
+                    alert(`You defeated the ${beast.name}! Go on to the next level.`);
+                    
+                    urlBuilder(statArray)
+                    
+                    function urlBuilder(array) {
+                        let stringy = array.toString();
+                        let url = stringy.replace(/,/g, '/');
+                        window.open(`/${url}/6`, '_self');
+                    }
+                    return false;
+                }
+
+            }
+
+            if (firstTurn < 0){
+                let userHit = (luck > randomNum) ? parseInt((weapon.damage * (1 + luck - randomNum))) : weapon.damage;
+                let beastHealth = document.getElementById('beastHealth');
+                let beastHealthInt = parseInt(beastHealth.innerHTML);
+                let beastHP = beastHealthInt - userHit;
+                alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
+                if (beastHP > 0){
+                    beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+                }
+
+                else{
+                    alert(`You defeated the ${beast.name}! Go on to the next level.`);
+
+                    urlBuilder(statArray)
+                    
+                    function urlBuilder(array) {
+                        let stringy = array.toString();
+                        let url = stringy.replace(/,/g, '/');
+                        window.open(`/${url}/6`, '_self');
+                    }
+                    return false;
+                }
+
+                let beastHit = (beast.luck > randomNum) ? parseInt((beast.damage * (1 + beast.luck - randomNum))) : beast.damage;
+                let userHealth = document.getElementById('userHealth');
+                let userHealthInt = parseInt(userHealth.innerHTML);
+                let adventurerHP = userHealthInt - beastHit;
+                alert(`The ${beast.name} attacked and took off ${beastHit} HP!`);
+                if (adventurerHP > 0){
+                    userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                }
+
+                else {
+                    alert(`Your journey ends here, Adventurer!`);
+                    window.open(`/Woodlands`, "_self");
+                    return false;
+                }
+            }
+
+            if (firstTurn == 0){
+                if (luck > 3.2){
+                    let userHit = (luck > randomNum) ? parseInt((weapon.damage * (1 + luck - randomNum))) : weapon.damage;
+                    let beastHealth = document.getElementById('beastHealth');
+                    let beastHealthInt = parseInt(beastHealth.innerHTML);
+                    let beastHP = beastHealthInt - userHit;
+                    alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
+                    if (beastHP > 0){
+                        beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+                    }
+
+                    else{
+                        alert(`You defeated the ${beast.name}! Go on to the next level.`);
+
+                        urlBuilder(statArray)
+                    
+                        function urlBuilder(array) {
+                            let stringy = array.toString();
+                            let url = stringy.replace(/,/g, '/');
+                            window.open(`/${url}/6`, '_self');
+                        }
+                        return false;
+                    }
+
+                    let beastHit = (beast.luck > randomNum) ? parseInt((beast.damage * (1 + beast.luck - randomNum))) : beast.damage;
+                    let userHealth = document.getElementById('userHealth');
+                    let userHealthInt = parseInt(userHealth.innerHTML);
+                    let adventurerHP = userHealthInt - beastHit;
+                    alert(`The ${beast.name} attacked and took off ${beastHit} HP!`);
+                    
+                    if (adventurerHP > 0){
+                        userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                    }
+
+                    else {
+                        alert(`Your journey ends here, Adventurer!`);
+                        window.open(`/Woodlands`, "_self");
+                        return false;
+                    }
+                }
+
+                else {
+                    let beastHit = (beast.luck > randomNum) ? parseInt((beast.damage * (1 + beast.luck - randomNum))) : beast.damage;
+                    let userHealth = document.getElementById('userHealth');
+                    let userHealthInt = parseInt(userHealth.innerHTML);
+                    let adventurerHP = userHealthInt - beastHit;
+                    alert(`The ${beast.name} attacked and took off ${beastHit} HP!`);
+                    
+                    if (adventurerHP > 0){
+                        userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString());
+                    }
+
+                    else {
+                        alert(`Your journey ends here, Adventurer!`);
+                        window.open(`/Woodlands`, "_self");
+                        return false;
+                    }
+
+                    let userHit = (luck > randomNum) ? parseInt((weapon.damage * (1 + luck - randomNum))) : weapon.damage;
+                    let beastHealth = document.getElementById('beastHealth');
+                    let beastHealthInt = parseInt(beastHealth.innerHTML);
+                    let beastHP = beastHealthInt - userHit;
+                    alert(`You attacked the ${beast.name} and took off ${userHit} HP!`);
+                    
+                    if (beastHP > 0){
+                        beastHealth.innerHTML = beastHealth.innerHTML.replace(beastHealth.innerHTML, beastHP.toString());
+                    }
+
+                    else{
+                        alert(`You defeated the ${beast.name}! Go on to the next level.`);
+
+                        urlBuilder(statArray)
+                    
+                        function urlBuilder(array) {
+                            let stringy = array.toString();
+                            let url = stringy.replace(/,/g, '/');
+                            window.open(`/${url}/6`, '_self');
+                        }
+                        return false;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2</title>
+
+    <style>
+                
+        body {
+            background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/77488ccb-d44e-4433-939a-6091d38846d9/d9fgu22-f8e5abdc-a7b1-4aec-8baa-b8ee8a3cf3cc.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi83NzQ4OGNjYi1kNDRlLTQ0MzMtOTM5YS02MDkxZDM4ODQ2ZDkvZDlmZ3UyMi1mOGU1YWJkYy1hN2IxLTRhZWMtOGJhYS1iOGVlOGEzY2YzY2MuZ2lmIn1dXX0.kAYNXw8ZBO-yA4ut_fAhRdTamKV5vRO5734FBBmwZew');
+            background-size: cover;
+        }
+
+        .foggyNarr{
+            background-color: white;
+            opacity: 0.6;
+            margin-left: -0.4%;
+            width: 100vw;
+            height: 300px;
+            margin-top: 10%;
+            text-align: center;
+        }
+
+        .p{
+            color: rgb(8, 87, 8);
+            font-size: 2em;
+            font-weight: bold;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding: 40px 20px 20px 350px;
+        }
+
+        @keyframes themagic {
+            0% {opacity: 0;}
+            25% {opacity: 1;}
+            50% {opacity: 1;}
+            75% {opacity: 1;}
+            100% {opacity: 0%;}
+        }
+
+        @keyframes appear {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+
+        #p1 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 8s forwards;
+            animation-delay: 0s;
+        }
+
+        #p2 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 6s forwards;
+            animation-delay: 7s;
+            padding: 60px 20px 20px 500px;
+        }
+
+        #p3 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 4s forwards;
+            animation-delay: 12s;
+            padding: 75px 20px 20px 600px;
+        }
+
+        #p4 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 7s forwards;
+            animation-delay: 15s;
+            padding: 50px 20px 20px 450px;
+        }
+
+        #p5 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 4s forwards;
+            animation-delay: 23s;
+            padding: 40px 20px 20px 400px;
+        }
+
+        #numGuess{
+            opacity: 0;
+            animation: appear 0s forwards;
+            animation-delay: 27s;
+        }
+
+        input[type="radio"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            margin: 0;
+            font: inherit;
+            color: rgb(8, 87, 8);;
+            width: 1.15em;
+            height: 1.15em;
+            border: 0.15em solid gold;
+            border-radius: 10%;
+        }
+
+        input[type="radio"]:focus {
+            background-color: rgb(8, 87, 8);
+        }
+
+        p6{
+            color: black;
+            font-size: 2em;
+            font-weight: bold;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            line-height: 25px;
+            text-shadow: 2px 2px 4px black;
+            padding: 10px 10px 10px 10px;
+        }
+
+        p7{
+            font-size: 1.25em;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: black;
+            line-height: 50px;
+        }
+
+        .userStats {
+            background-color: white;
+            width: 100px;
+            height: 50px;
+            margin-top: 0%;
+            margin-left: 0%;
+            font-weight: bold;
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="userStats">
+        <p7>
+            HP:<p7 id="userHealth">100</p2>%<br>
+        </p7>
+    </div>
+
+    <div class="foggyNarr">
+        <center>
+        <p class="p" id="p1">That snake tried to kill you<br>
+        but you are a mighty adventurer,&nbsp;indeed!<br>
+        After eating a quick snack you're now continuing through the forest<br>
+        but you've noticed a thick fog is creeping in.<br></p>
+        <p class="p" id="p2">You suddenly feel a tightness in your chest<br>
+        and an overwhelming need to cough.</p2>
+        <p class="p" id="p3">The fog! It's poisoning you!!!!</p>
+        <p class="p" id="p4">It's so dense and you're scrambling to find a way out.<br>
+        Nearly close to fainting, you stumble upon a locked gate<br>
+        that needs a special number to open.<br>
+        </p>
+        <p class="p" id="p5">There's no other choice.<br>
+        You have to figure out the number before it's too late!<br>
+        What's your guess?<br>
+        </p5></center>
+        <div id="numGuess">
+            <center>
+            <br><br>
+            <% if (luck <= 3) { %>
+                <input type="radio" id="right" onclick="reroute()"><label for="right"><p6><%=randomNum%></p6></label><br><br>
+
+                <% for (i=1; i<5; i++) { %>
+                    <input type="radio" id="wrong" onclick="poison()"><label for="wrong"><p6><%=randomNum + i%></p6></label><br><br>
+                <% } %>
+            <% } %>
+
+            <% if (luck > 3 && luck < 4) { %>
+                <input type="radio" id="wrong" onclick="poison()"><label for="wrong"><p6><%=randomNum + 2%></p6></label><br><br>
+
+                <input type="radio" id="right" onclick="reroute()"><label for="right"><p6><%=randomNum%></p6></label><br><br>
+
+                <input type="radio" id="wrong" onclick="poison()"><label for="wrong"><p6><%=randomNum - 1%></p6></label>
+            <% } %>
+
+            <% if (luck == 4) { %>
+                <input type="radio" id="wrong" onclick="poison()"><label for="wrong"><p6><%=randomNum + 2%></p6></label><br><br>
+
+                <input type="radio" id="right" onclick="reroute()"><label for="right"><p6><%=randomNum%></p6></label>
+            <% } %>
+
+            </center>
+        </div>
+    </div>
+
+    <script>
+        function poison(){
+            alert(`Oh no! That was the wrong number and you lost 10 HP from the poison!`);
+            let userHealth = document.getElementById('userHealth');
+            let userHealthInt = parseInt(userHealth.innerHTML);
+            let adventurerHP = userHealthInt - 10;
+            userHealth.innerHTML = userHealth.innerHTML.replace(userHealth.innerHTML, adventurerHP.toString() + '%');
+        }
+
+        function reroute(){
+            const url = window.location.toString();
+            let stats = url.substr(22, url.length);
+            let statArray = stats.split("/");
+            statArray.pop();
+
+            alert(`You picked the right number. Let's get out of here!`);
+
+            urlBuilder(statArray)
+                    
+            function urlBuilder(array) {
+                let stringy = array.toString();
+                let url = stringy.replace(/,/g, '/');
+                window.open(`/${url}/3`, '_self');
+            }
+        }
+    </script>
+</body>
+</html>

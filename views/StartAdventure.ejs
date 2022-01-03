@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventurer Builder</title>
+
+    <style>
+
+        body {
+            background-image: url('https://i.pinimg.com/originals/68/30/30/68303024d2caeb1c216be77b175da9b6.gif');
+            background-size: cover;
+        }
+
+        #form {
+            margin-top: 5%;
+            margin-left: 18%;
+        }
+        input {
+            width: 700px;
+            border: 2px solid rgb(8, 87, 8);
+            background-color: black;
+            color: white;
+            font-size: 2em;
+        }
+
+        .butts, .power-butts {
+            width: 120px;
+            height: 120px;
+            border-style: solid;
+            border-color: gold;
+            border-width: 2px;
+        }
+
+        .butts:focus {
+            background-color: rgb(8, 87, 8);
+        }
+
+        .power-butts:focus {
+            background-color: rgb(8, 87, 8);
+        }
+
+        label, p {
+            color: gold;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        .butt {
+            background-color: rgb(8, 87, 8);
+            color: white;
+            text-align: center center;
+            font-size: 2em;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .card {
+            display: none;
+            position: absolute;
+            background-color: black;
+            width: 350px;
+            height: 500px;
+            opacity: 0.8;
+            border-radius: 10%;
+            top: 10%;
+            left: 40%;
+        }
+
+        h3 {
+            text-align: center;
+            color: white;
+            font-size: 2em;
+        }
+
+        p2 {
+            text-align: center;
+            color: white;
+            font-size: 1.6em;
+        }
+        
+        #weapons {
+            margin-top: 5%;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="card" id="swordStats">
+        <h3>Sword</h3>
+        <hr>
+        <br>
+        <p2>An adventurer favorite. What the sword lacks in power,
+            it makes up for in speed.
+            <br><br>
+            Speed: 4<br>
+            Power: 3<br>
+            Damage: 6<br>
+        </p2>
+        <br><br><br>
+        <center><button class="butt" id="close-butt" onclick="closeSwordStats()">Close</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="butt" id="confirm-butt" onclick="dataStorage('sword')">Choose</button></center>
+    </div>
+
+    <div class="card" id="axeStats">
+        <h3>Axe</h3>
+        <hr>
+        <br>
+        <p2>So much power but oh so heavy.
+            <br><br>
+            Speed: 2<br>
+            Power: 5<br>
+            Damage: 10<br>
+        </p2>
+        <br><br><br>
+        <center><button class="butt" id="close-butt" onclick="closeAxeStats()">Close</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="butt" id="confirm-butt" onclick="dataStorage('axe')">Choose</button></center>
+    </div>
+
+    <div class="card" id="gunStats">
+        <h3>Gun</h3>
+        <hr>
+        <br>
+        <p2>Takes awhile to aim but deals a good bit of damage.
+            <br><br>
+            Speed: 3<br>
+            Power: 4<br>
+            Damage: 8<br>
+        </p2>
+        <br><br><br>
+        <center><button class="butt" id="close-butt" onclick="closeGunStats()">Close</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="butt" id="confirm-butt" onclick="dataStorage('gun')">Choose</button></center>
+    </div>
+
+    
+    <div class="card" id="healerStats">
+        <h3>Healer</h3>
+        <hr>
+        <br>
+        <p2>When used, add 10 health points.
+        </p2>
+        <br><br><br>
+        <center><button class="butt" id="close-butt" onclick="closeHealerStats()">Close</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="butt" id="confirm-butt" onclick="dataStorage('healer')">Choose</button></center>
+    </div>
+
+    <div class="card" id="cloneStats">
+        <h3>Clone</h3>
+        <hr>
+        <br>
+        <p2>Creates a clone with half HP that takes damage.<br>
+            Can only be used once per battle.
+        </p2>
+        <br><br><br>
+        <center><button class="butt" id="close-butt" onclick="closeCloneStats()">Close</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="butt" id="confirm-butt" onclick="dataStorage('clone')">Choose</button></center>
+    </div>
+
+    <div class="card" id="superChargeStats">
+        <h3>Supercharged</h3>
+        <hr>
+        <br>
+        <p2>Deals double damage.<br>
+            May lose a turn to invoke.
+        </p2>
+        <br><br><br>
+        <center><button class="butt" id="close-butt" onclick="closeSuperChargeStats()">Close</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="butt" id="confirm-butt" onclick="dataStorage('supercharge')">Choose</button></center>
+    </div>
+
+
+    <div id="weapons">
+        <center>
+        <p>Choose your weapon:</p>
+        <button class="butts" onclick="showSwordStats()"><img src="http://ecx.images-amazon.com/images/I/41KqQ8dAhcL.jpg" width="100px" height="100px"></button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="butts" onclick="showAxeStats()"><img src="http://ecx.images-amazon.com/images/I/51jGqH5PKqL.jpg" width="100px" height="100px"></button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="butts" onclick="showGunStats()"><img
+            src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2f8ef429-1a77-46d0-a187-7af45ccf973e/d8ik0g0-16d29599-de23-45e1-87a6-4b2a3ef972a9.jpg/v1/fill/w_894,h_894,q_75,strp/8_bit_revolver_design_by_ksalmanoglu-d8ik0g0.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8yZjhlZjQyOS0xYTc3LTQ2ZDAtYTE4Ny03YWY0NWNjZjk3M2UvZDhpazBnMC0xNmQyOTU5OS1kZTIzLTQ1ZTEtODdhNi00YjJhM2VmOTcyYTkuanBnIiwid2lkdGgiOiI8PTg5NCIsImhlaWdodCI6Ijw9ODk0In1dXX0.swphbNgwCLnDKJNfct_JBPVETXm17vSMjyw2nvcmyQo"
+            width="100px" height="100px"></button>
+    </div></center>
+    <br><br>
+    <center>
+    <div id="magic">
+        <p>Choose your power:</p>
+        <button class="power-butts" onclick="showHealerStats()"><img src="https://i.pinimg.com/originals/98/a9/bf/98a9bf22d289ae57b8b78793dbdbe253.jpg" width="100px" height="100px"></button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="power-butts" onclick="showCloneStats()"><img src="https://i.ibb.co/j57B1Ks/number2.png" width="100px" height="100px"></button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="power-butts" onclick="showSuperChargeStats()"><img src="https://www.kindpng.com/picc/m/7-74145_8-bit-explosion-png-transparent-png.png" width="100px" height="100px"></button>
+    </div></center>
+
+    <div id="form">
+        <form onsubmit="setStats()" method="get">
+            <label for="name">Enter your name:</label>
+            <input type="text" id="userName" name="name">
+            <button type="submit" class="butt" id="submit-butt">Submit</button>
+        </form>
+    </div>
+    <script>
+
+        const vowels = ['a', 'e', 'i', 'o', 'u'];
+        const baseLuck = 2;
+        const dataArray = [];
+
+        function dataStorage(data) {
+            let card = document.getElementsByClassName("card").value;
+            if (data == 'gun' || data == 'sword' || data == 'axe'){
+                dataArray.push(data);
+                closeAxeStats();
+                closeSwordStats();
+                closeGunStats();
+            }
+
+            if (data == 'healer' || data == 'clone' || data == 'supercharge'){
+                dataArray.push(data);
+                closeHealerStats();
+                closeCloneStats();
+                closeSuperChargeStats();
+            }
+        }
+
+        function showSwordStats() {
+            document.getElementById("swordStats").style.display = "block";
+        }
+
+        function closeSwordStats() {
+            document.getElementById("swordStats").style.display = "none";
+        }
+
+        function showAxeStats() {
+            document.getElementById("axeStats").style.display = "block";
+        }
+
+        function closeAxeStats() {
+            document.getElementById("axeStats").style.display = "none";
+        }
+
+        function showGunStats() {
+            document.getElementById("gunStats").style.display = "block";
+        }
+
+        function closeGunStats() {
+            document.getElementById("gunStats").style.display = "none";
+        }
+
+        function showHealerStats() {
+            document.getElementById("healerStats").style.display = "block";
+        }
+
+        function closeHealerStats() {
+            document.getElementById("healerStats").style.display = "none";
+        }
+
+        function showCloneStats() {
+            document.getElementById("cloneStats").style.display = "block";
+        }
+
+        function closeCloneStats() {
+            document.getElementById("cloneStats").style.display = "none";
+        }
+
+        function showSuperChargeStats() {
+            document.getElementById("superChargeStats").style.display = "block";
+        }
+
+        function closeSuperChargeStats() {
+            document.getElementById("superChargeStats").style.display = "none";
+        }
+
+        function setStats() {
+            let name = document.getElementById('userName').value;
+            let lowerName = name.toLowerCase();
+            let vowelCount = 0;
+
+            for (i=0; i<lowerName.length; i++) {
+                for (j=0; j<vowels.length; j++) {
+                    if (lowerName[i] == vowels[j]){
+                        vowelCount++;
+                    }
+                }
+            }
+            let luckMultiplier = vowelCount/lowerName.length;
+            let getLucky = baseLuck * (1 + luckMultiplier);
+            dataArray.push(getLucky);
+
+            urlBuilder(dataArray);
+
+        }
+
+        function urlBuilder(array) {
+            let stringy = array.toString();
+            let url = stringy.replace(/,/g, '/');
+            window.open(`/${url}`);
+        }
+
+    </script>
+</body>
+</html>

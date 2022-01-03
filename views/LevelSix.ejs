@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 6</title>
+
+    <style>
+                
+        body {
+            background-image: url('https://i.pinimg.com/originals/68/30/30/68303024d2caeb1c216be77b175da9b6.gif');
+            background-size: cover;
+        }
+
+        .foggyNarr{
+            background-color: white;
+            opacity: 0.6;
+            margin-left: -0.4%;
+            width: 100vw;
+            height: 300px;
+            margin-top: 10%;
+            text-align: center;
+        }
+
+        .p{
+            color: rgb(8, 87, 8);
+            font-size: 2em;
+            font-weight: bold;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding: 40px 20px 20px 350px;
+        }
+
+        @keyframes themagic {
+            0% {opacity: 0;}
+            25% {opacity: 1;}
+            50% {opacity: 1;}
+            75% {opacity: 1;}
+            100% {opacity: 0%;}
+        }
+
+        @keyframes appear {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+
+        #p1 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 7s forwards;
+            animation-delay: 0s;
+        }
+
+        #p2 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 6s forwards;
+            animation-delay: 7s;
+            padding: 60px 20px 20px 400px;
+        }
+
+        #p3 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 7s forwards;
+            animation-delay: 12s;
+            padding: 75px 20px 20px 400px;
+        }
+
+        #p4 {
+            position: absolute;
+            opacity: 0;
+            animation: themagic 7s forwards;
+            animation-delay: 18s;
+            padding: 50px 20px 20px 450px;
+        }
+
+        #p5 {
+            position: absolute;
+            opacity: 0;
+            animation: appear 4s forwards;
+            animation-delay: 22s;
+            padding: 40px 20px 20px 400px;
+        }
+
+        .butt {
+            background-color: rgb(8, 87, 8);
+            color: white;
+            text-align: center;
+            font-size: 1em;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            animation: appear 4s forwards;
+            animation-delay: 22s;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="foggyNarr">
+        <center>
+        <p class="p" id="p1">You need a break!<br>
+        These animals are out for blood today.<br>
+        You could use some rest and a moment to fix your <%=weapon.name%>.<br>
+        </p>
+        <p class="p" id="p2">You look around to find a cozy spot for the night<br>
+        but no luck.</p2>
+        <p class="p" id="p3">You notice a cliff with a fallen tree that reaches the other side.</p>
+        <p class="p" id="p4">The drop below is certain to bring you to your death,<br>
+        but you see the perfect location to take a breather.<br>
+        </p>
+        <p class="p" id="p5">You put one foot on the tree to begin the walk across and...<br></p5><br><br>
+        <button class="butt" onclick="crossCliff()">Cross the Cliff</button>
+        </center>
+    </div>
+
+    <script>
+
+        function crossCliff(){
+            const url = window.location.toString();
+            let end = url.length - 1;
+            let stats = url.substr(22, end);
+            let statArray = stats.split("/");
+            let luck = statArray[2];
+
+            if (luck <= 2.8) {
+                alert(`Oh no! You lost your balance and fell to your death!\nBetter luck next time, Adventurer.`);
+                window.open('/Woodlands', '_self');
+                return false;
+            }
+
+            if (luck >= 3 && luck < 4) {
+                alert(`You made it, but you slipped a few times!`);
+                nextLevel();
+            }
+
+            if (luck == 4) {
+                alert(`You made that look easy! You're as graceful as a gazelle.`);
+                nextLevel();
+            }
+        }
+
+        function nextLevel(){
+            const url = window.location.toString();
+            let stats = url.substr(22, url.length);
+            let statArray = stats.split("/");
+            statArray.pop();
+
+            urlBuilder(statArray)
+
+            function urlBuilder(array) {
+                let stringy = array.toString();
+                let url = stringy.replace(/,/g, '/');
+                window.open(`/${url}/7`, '_self');
+            }
+        }
+
+    </script>
+</body>
+</html>
