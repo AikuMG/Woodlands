@@ -175,7 +175,7 @@
         function powerMove(){
             const url = window.location.toString();
             let end = url.length - 1;
-            let stats = url.substr(22, end);
+            let stats = url.substr(41, end);
             let statArray = stats.split("/");
             statArray.pop();
             let power = statArray[1];
@@ -227,7 +227,7 @@
 
                 else {
                     alert(`Your journey ends here, Adventurer!`);
-                    window.open(`/Woodlands`, "_self");
+                    window.open(`/`, "_self");
                     return false;
                 }
 
@@ -249,7 +249,7 @@
                     function urlBuilder(array) {
                         let stringy = array.toString();
                         let url = stringy.replace(/,/g, '/');
-                        window.open(`/${url}/6`, '_self');
+                        window.open(`${url}/6`, '_self');
                     }
                     return false;
                 }
@@ -259,7 +259,7 @@
         function firstAttack(){
             const url = window.location.toString();
             let end = url.length - 1;
-            let stats = url.substr(22, end);
+            let stats = url.substr(41, end);
             let statArray = stats.split("/");
             statArray.pop();
             let luck = parseFloat(statArray[2]);
@@ -353,7 +353,7 @@
         function attack(){
             const url = window.location.toString();
             let end = url.length - 1;
-            let stats = url.substr(22, end);
+            let stats = url.substr(41, end);
             let statArray = stats.split("/");
             statArray.pop();
             let luck = parseFloat(statArray[2]);
@@ -381,7 +381,7 @@
 
                 else {
                     alert(`Your journey ends here, Adventurer!`);
-                    window.open(`/Woodlands`, "_self");
+                    window.open(`/`, "_self");
                     return false;
                 }
 
@@ -403,7 +403,7 @@
                     function urlBuilder(array) {
                         let stringy = array.toString();
                         let url = stringy.replace(/,/g, '/');
-                        window.open(`/${url}/6`, '_self');
+                        window.open(`${url}/6`, '_self');
                     }
                     return false;
                 }
@@ -428,7 +428,7 @@
                     function urlBuilder(array) {
                         let stringy = array.toString();
                         let url = stringy.replace(/,/g, '/');
-                        window.open(`/${url}/6`, '_self');
+                        window.open(`${url}/6`, '_self');
                     }
                     return false;
                 }
@@ -444,7 +444,7 @@
 
                 else {
                     alert(`Your journey ends here, Adventurer!`);
-                    window.open(`/Woodlands`, "_self");
+                    window.open(`/`, "_self");
                     return false;
                 }
             }
@@ -468,7 +468,7 @@
                         function urlBuilder(array) {
                             let stringy = array.toString();
                             let url = stringy.replace(/,/g, '/');
-                            window.open(`/${url}/6`, '_self');
+                            window.open(`${url}/6`, '_self');
                         }
                         return false;
                     }
@@ -485,7 +485,7 @@
 
                     else {
                         alert(`Your journey ends here, Adventurer!`);
-                        window.open(`/Woodlands`, "_self");
+                        window.open(`/`, "_self");
                         return false;
                     }
                 }
@@ -503,7 +503,7 @@
 
                     else {
                         alert(`Your journey ends here, Adventurer!`);
-                        window.open(`/Woodlands`, "_self");
+                        window.open(`/`, "_self");
                         return false;
                     }
 
@@ -525,7 +525,7 @@
                         function urlBuilder(array) {
                             let stringy = array.toString();
                             let url = stringy.replace(/,/g, '/');
-                            window.open(`/${url}/6`, '_self');
+                            window.open(`${url}/6`, '_self');
                         }
                         return false;
                     }
