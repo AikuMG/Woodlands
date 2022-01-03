@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const session = require('express-session');
 //const functions = require('./functions.js');
 const port = process.env.PORT || 3636;
 const startHealth = 100;
@@ -21,6 +22,13 @@ const weapons = [
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+app.use(session({
+    secret: 'username',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+  }))
+
 app.listen(port, () => {
     console.log(`Hosting game on localhost:${port}`);
 })
@@ -28,12 +36,24 @@ app.listen(port, () => {
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-    res.render("index");
+    const session_username = req.session.username;
+    res.render("index", {user: session_username});
 })
 
 app.post('/login', (req, res) => {
     const user = req.body.username;
-    res.send(`Welcome, ${user}! Log in successful.`);
+    const validUsers = [
+        {"name": "aag", "password": "passw0rd"},
+        {"name": "tp6", "password": "t@l3nt"},
+        {"name": "sarah", "password": "cAt1uvR"}
+    ]
+
+    if (validUsers.includes(user)){
+        req.session.username = user;
+        res.redirect("/Woodlands");
+    }
+
+    else { res.redirect("/"); }
 })
 
 app.get("/Woodlands", (req, res) => {
