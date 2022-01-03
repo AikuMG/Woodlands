@@ -53,14 +53,20 @@ app.post('/login', (req, res) => {
     if (validUsers.includes(user)){
         console.log(`I'm in the if statement with the user ${user}`);
         req.session.username = user;
-        res.redirect("/Woodlands");
+        res.redirect("Woodlands");
     }
 
     else { res.redirect("/"); }
 })
 
 app.get("/Woodlands", (req, res) => {
-    res.render("Woodlands");
+    if (req.session && req.session.username){
+        res.render("Woodlands", {user: req.session.username});
+    }
+    else {
+        req.session.destroy(()=>{});
+        res.redirect("/");
+    }
 })
 
 app.get("/StartAdventure", (req, res) => {
