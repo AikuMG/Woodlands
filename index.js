@@ -15,13 +15,13 @@ const beasts = [
     {name: "raven", speed: 5, power: 2, damage: 10, health: 50},
     {name: "boar", speed: 3, power: 4, damage: 20, health: 80},
     {name: "bear", speed: 5, power: 5, damage: 25, health: 120}
-    ]
+    ];
 
 const weapons = [
     {name: "sword", speed: 3, power: 3, damage: 6},
     {name: "axe", speed: 2, power: 5, damage: 10},
     {name: "gun", speed: 4, power: 4, damage: 8}
-]
+];
 
 /*
 let awsConfig = {
@@ -44,12 +44,12 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
-  }))
+}));
 
 
 app.listen(port, () => {
     console.log(`Hosting game on localhost:${port}`);
-})
+});
 
 app.set("view engine", "ejs");
 
@@ -85,7 +85,7 @@ app.post("/login", (req, res) => {
         req.session.destroy(() => {});
         res.redirect("/?reason=invalid_user");
     }
-})
+});
 
 app.get("/Woodlands", (req, res) => {
     if (req.session && req.session.username){
@@ -95,7 +95,7 @@ app.get("/Woodlands", (req, res) => {
         res.redirect("/");
     }
     
-})
+});
 
 
 /*
@@ -198,7 +198,7 @@ app.get("/StartAdventure", (req, res) => {
          res.redirect("/");
      }
     //res.render("StartAdventure");
-})
+});
 
 app.get("/:weapon/:power/:luck", (req, res) => {
 
@@ -224,7 +224,7 @@ app.get("/:weapon/:power/:luck", (req, res) => {
 
     res.render("LevelOne", {weapon, magic, luck, beast, startHealth});
     */
-})
+});
 
 app.get("/:weapon/:power/:luck/2", (req, res) => {
     const weap = req.params['weapon'];
@@ -234,7 +234,7 @@ app.get("/:weapon/:power/:luck/2", (req, res) => {
     let weapon = weapons.find(weapon => weapon.name == weap);
     let randomNum = parseInt(Math.random() * (10-1) + 1);
     res.render("LevelTwo", {weapon, magic, luck, startHealth, randomNum});
-})
+});
 
 app.get("/:weapon/:power/:luck/3", (req, res) => {
     const weap = req.params['weapon'];
@@ -245,7 +245,7 @@ app.get("/:weapon/:power/:luck/3", (req, res) => {
     let weapon = weapons.find(weapon => weapon.name == weap);
 
     res.render("LevelThree", {weapon, magic, luck, beast, startHealth});
-})
+});
 
 app.get("/:weapon/:power/:luck/4", (req, res) => {
     const weap = req.params['weapon'];
@@ -256,7 +256,7 @@ app.get("/:weapon/:power/:luck/4", (req, res) => {
     let weapon = weapons.find(weapon => weapon.name == weap);
 
     res.render("LevelFour", {weapon, magic, luck, beast, startHealth});
-})
+});
 
 app.get("/:weapon/:power/:luck/5", (req, res) => {
     const weap = req.params['weapon'];
@@ -267,7 +267,7 @@ app.get("/:weapon/:power/:luck/5", (req, res) => {
     let weapon = weapons.find(weapon => weapon.name == weap);
 
     res.render("LevelFive", {weapon, magic, luck, beast, startHealth});
-})
+});
 
 app.get("/:weapon/:power/:luck/6", (req, res) => {
     const weap = req.params['weapon'];
@@ -277,7 +277,7 @@ app.get("/:weapon/:power/:luck/6", (req, res) => {
     let weapon = weapons.find(weapon => weapon.name == weap);
     let randomNum = parseInt(Math.random() * (10-1) + 1);
     res.render("LevelSix", {weapon, magic, luck, startHealth, randomNum});
-})
+});
 
 app.get("/:weapon/:power/:luck/7", (req, res) => {
     const weap = req.params['weapon'];
@@ -288,7 +288,7 @@ app.get("/:weapon/:power/:luck/7", (req, res) => {
     let weapon = weapons.find(weapon => weapon.name == weap);
 
     res.render("LevelSeven", {weapon, magic, luck, beast, startHealth});
-})
+});
 
 app.get("/:weapon/:power/:luck/8", (req, res) => {
     const weap = req.params['weapon'];
@@ -299,8 +299,8 @@ app.get("/:weapon/:power/:luck/8", (req, res) => {
     let weapon = weapons.find(weapon => weapon.name == weap);
 
     res.render("LevelEight", {weapon, magic, luck, beast, startHealth});
-})
+});
 
 app.get("/:weapon/:power/:luck/9", (req, res) => {
     res.render("Complete");
-})
+});
