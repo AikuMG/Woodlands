@@ -27,8 +27,7 @@ const weapons = [
 let awsConfig = {
     "region": "us-east-1",
     "endpoint": "http://dynamodb.us-east-1.amazonaws.com",
-    "accessKeyId": "AKIA3LV5SZNVGH45ZJJN",
-    "secretAccessKey": "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"
+
 };
 AWS.config.update(awsConfig);
 
