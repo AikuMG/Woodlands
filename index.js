@@ -1,11 +1,7 @@
 const express = require("express");
 const app = express();
 const session = require('express-session');
-//const AWS = require('aws-sdk');
 const res = require("express/lib/response");
-const { resetWatchers } = require("nodemon/lib/monitor/watch");
-//const { resetWatchers } = require("nodemon/lib/monitor/watch");
-//const functions = require('./functions.js');
 const port = process.env.PORT || 3636;
 const startHealth = 100;
 const beasts = [
@@ -23,16 +19,6 @@ const weapons = [
     {name: "gun", speed: 4, power: 4, damage: 8}
 ];
 
-/*
-let awsConfig = {
-    "region": "us-east-1",
-    "endpoint": "http://dynamodb.us-east-1.amazonaws.com",
-
-};
-AWS.config.update(awsConfig);
-
-let docClient = new AWS.DynamoDB.DocumentClient();
-*/
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -95,7 +81,6 @@ app.get("/Woodlands", (req, res) => {
     }
     
 });
-
 
 /*
 app.post('/signup', (req, res) => {
@@ -196,7 +181,6 @@ app.get("/StartAdventure", (req, res) => {
      else {
          res.redirect("/");
      }
-    //res.render("StartAdventure");
 });
 
 app.get("/:weapon/:power/:luck", (req, res) => {
@@ -213,16 +197,6 @@ app.get("/:weapon/:power/:luck", (req, res) => {
      else {
          res.redirect("/");
      }
-    /*
-    const weap = req.params['weapon'];
-    const magic = req.params['power'];
-    const luck = req.params['luck'];
-
-    let beast = beasts[0];
-    let weapon = weapons.find(weapon => weapon.name == weap);
-
-    res.render("LevelOne", {weapon, magic, luck, beast, startHealth});
-    */
 });
 
 app.get("/:weapon/:power/:luck/2", (req, res) => {
